@@ -1,9 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import Editors from './editors';
+import Formatters from './formatters';
+import Headers from './headers';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+export default { Editors, Formatters, Headers };
