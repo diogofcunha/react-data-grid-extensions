@@ -15,7 +15,9 @@ git remote add upstream "https://$GH_TOKEN@github.com/diogofcunha/react-data-gri
 git fetch upstream
 git reset upstream/gh-pages
 
-git mv /home/travis/build/diogofcunha/react-data-grid-extensions/build /home/travis/build/diogofcunha/react-data-grid-extensions/
+echo $pwd
+
+cp -a /home/travis/build/diogofcunha/react-data-grid-extensions/build .
 
 git add -A .
 git commit -m "rebuild pages"
