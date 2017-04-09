@@ -16,7 +16,7 @@ git fetch upstream
 git reset upstream/gh-pages
 npm run build
 
-cp -a ./build/ "$pwd"
+git mv /home/travis/build/diogofcunha/react-data-grid-extensions/build /home/travis/build/diogofcunha/react-data-grid-extensions/
 
 git add -A .
 git commit -m "rebuild pages"
