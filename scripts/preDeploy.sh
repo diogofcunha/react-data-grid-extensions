@@ -15,8 +15,7 @@ git remote add upstream "https://$GH_TOKEN@github.com/diogofcunha/react-data-gri
 git fetch upstream
 git reset upstream/gh-pages
 
-echo "myproject.com" > CNAME
-touch .
+cp -a ./build/ ./
 
 git add -A .
 git commit -m "rebuild pages"
