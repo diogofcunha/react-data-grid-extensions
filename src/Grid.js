@@ -4,45 +4,66 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { connectHeader } from './headers/columnActionHeader';
 import PercentageEditor from './editors/PercentageEditor';
 import DateEditor from './editors/DateEditor';
+import JsonFormatter from './formatters/JsonFormatter';
 
 const getInitialColumns = () => ([
    {
       key: 'id',
       name: 'ID',
-      width: 80
+      width: 80,
+      resizable: true
    },
    {
       key: 'task',
       name: 'Title',
-      editable: true
+      editable: true,
+      resizable: true,
+      width: 100
    },
    {
       key: 'priority',
       name: 'Priority',
-      editable: true
+      editable: true,
+      resizable: true,
+      width: 125
    },
    {
       key: 'issueType',
       name: 'Issue Type',
-      editable: true
+      editable: true,
+      resizable: true,
+      width: 150
+   },
+   {
+     key: 'taskInfo',
+     name: 'Task info',
+     formatter: JsonFormatter,
+     width: 400,
+     resizable: true
    },
    {
       key: 'complete',
       name: '% Complete',
       editable: true,
-      editor: PercentageEditor
+      editor: PercentageEditor,
+      resizable: true,
+      width: 200
    },
    {
       key: 'startDate',
       name: 'Start Date',
       editable: true,
-      editor: DateEditor
+      editor: DateEditor,
+      resizable: true,
+      width: 300
    },
    {
       key: 'completeDate',
       name: 'Expected Complete',
       editable: true,
-      editor: DateEditor
+      editor: DateEditor,
+      resizable: true,
+      width: 300
    }
 ]);
 
@@ -97,12 +118,17 @@ class Grid extends Component {
   createRows(numberOfRows) {
     let rows = [];
     for (let i = 1; i < numberOfRows; i++) {
+      const id = i;
+      const priority = ['Critical', 'High', 'Medium', 'Low'][Math.floor((Math.random() * 3) + 1)];
+      const issueType = ['Bug', 'Improvement', 'Epic', 'Story'][Math.floor((Math.random() * 3) + 1)];
+
       rows.push({
-        id: i,
+        id,
+        priority,
+        issueType,
         task: 'Task ' + i,
         complete: Math.min(100, Math.round(Math.random() * 110)),
-        priority: ['Critical', 'High', 'Medium', 'Low'][Math.floor((Math.random() * 3) + 1)],
-        issueType: ['Bug', 'Improvement', 'Epic', 'Story'][Math.floor((Math.random() * 3) + 1)],
+        taskInfo: { id, priority, issueType },
         startDate: this.getRandomDate(new Date(2015, 3, 1), new Date()),
         completeDate: this.getRandomDate(new Date(), new Date(2016, 0, 1))
       });
@@ -115,7 +141,7 @@ class Grid extends Component {
   }
 
   handleColumnChange(change) {
-    this.setState(handleColumnChange({ ...change, ... { setColumns: this.setColumns } }));
+    this.setState(handleColumnChange({ ...change, ...{ setColumns: this.setColumns } }));
   }
 
   handleColumnDelete(index) {
@@ -141,7 +167,7 @@ class Grid extends Component {
         columns={this.state.columns}
         rowGetter={this.rowGetter}
         rowsCount={this.state.rows.length}
-        minHeight={500}
+        minHeight={600}
         onGridRowsUpdated={this.handleGridRowsUpdated} />);
   }
 };
