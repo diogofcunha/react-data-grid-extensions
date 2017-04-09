@@ -16,7 +16,7 @@ git fetch upstream
 git reset upstream/gh-pages
 npm run build
 
-cp -a ./build/ .
+cp -r ./build/ .
 
 git add -A .
 git commit -m "rebuild pages"
