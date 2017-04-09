@@ -1,14 +1,19 @@
 {
   "name": "react-data-grid-extensions",
-  "version": "0.1.2",
-  "main": "build/index.js",
+  "version": "0.1.3",
+  "main": "build/main.js",
+  "homepage": "https://diogofcunha.github.io/react-data-grid-extensions/",
+  "description": "A set of extensions for react-data-grid",
+  "author": {
+    "name" : "Diogo Cunha",
+    "email" : "diogofncunha@gmail.com",
+    "url" : "http://www.diogocunha.net/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diogofcunha/react-data-grid-extensions"
+  },
   "devDependencies": {
-    "enzyme": "^2.8.0",
-    "react": "^15.4.2",
-    "react-addons-test-utils": "^15.5.0",
-    "react-data-grid": "^2.0.24",
-    "react-data-grid-addons": "^2.0.24",
-    "react-dom": "^15.4.2",
     "autoprefixer": "6.7.2",
     "babel-core": "6.22.1",
     "babel-eslint": "7.1.1",
@@ -23,6 +28,7 @@
     "css-loader": "0.26.1",
     "detect-port": "1.1.0",
     "dotenv": "2.0.0",
+    "enzyme": "^2.8.0",
     "eslint": "3.16.1",
     "eslint-config-react-app": "^0.6.2",
     "eslint-loader": "1.6.0",
@@ -33,6 +39,7 @@
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.10.0",
     "fs-extra": "0.30.0",
+    "gh-pages": "^0.12.0",
     "html-webpack-plugin": "2.24.0",
     "http-proxy-middleware": "0.17.3",
     "jest": "18.1.0",
@@ -40,7 +47,12 @@
     "object-assign": "4.1.1",
     "postcss-loader": "1.2.2",
     "promise": "7.1.1",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.5.0",
+    "react-data-grid": "^2.0.24",
+    "react-data-grid-addons": "^2.0.24",
     "react-dev-utils": "^0.5.2",
+    "react-dom": "^15.4.2",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
@@ -57,7 +69,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
@@ -95,5 +109,13 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "keywords": [
+    "react",
+    "react-data-grid",
+    "react-data-grid-addons",
+    "react-data-grid-extensions",
+    "react-grid",
+    "react-data-grid-plugins"
+  ]
 }
