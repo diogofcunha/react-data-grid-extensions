@@ -1,0 +1,9 @@
+.editor-base {
+  position: absolute;
+  z-index: 10;
+  background-color: white;
+  overflow: visible;
+  padding: 10px;
+  border: 1px groove;
+  width: 100%;
+}

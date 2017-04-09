@@ -1,0 +1,31 @@
+{
+  "name": "react-data-grid-extensions",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "enzyme": "^2.8.0",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.5.0",
+    "react-data-grid": "^2.0.24",
+    "react-data-grid-addons": "^2.0.24",
+    "react-dom": "^15.4.2",
+    "react-scripts": "0.9.5"
+  },
+  "peerDependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-data-grid": "^2.0.24",
+    "react-data-grid-addons": "^2.0.24"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "rc-slider": "^7.0.0",
+    "react-day-picker": "^5.2.0"
+  }
+}
