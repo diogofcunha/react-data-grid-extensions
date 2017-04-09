@@ -14,7 +14,6 @@ git config user.email "diogofncunha@gmail.com"
 git remote add upstream "https://$GH_TOKEN@github.com/diogofcunha/react-data-grid-extensions.git"
 git fetch upstream
 git reset upstream/gh-pages
-npm run build
 
 git mv /home/travis/build/diogofcunha/react-data-grid-extensions/build /home/travis/build/diogofcunha/react-data-grid-extensions/
 
