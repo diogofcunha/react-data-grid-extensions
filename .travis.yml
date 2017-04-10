@@ -18,7 +18,6 @@ branches:
 env: 
   global:
     - GITHUB_REPO: "diogofcunha/react-data-grid-extensions"
-    - secure: "kR6DabaTBX6xjiylq59QP3++fnfcaXMv1e7r9wSEewTb4EkRVNE1/8zgmUtorUwlQPxSLbspF0AvCWu0RIysKoE3+NLkT88IJUzkAb+Qv5aRg9fjk92e4xhja13nPCS1rP4Ed9ap7ZOkf91tpTKr/5m6HHP3Q4sAPrFqtlrk0pAoCL/+hLzH1xam0v/snNHEwHkXaghJceFiZKJBwLq391VkFEXN8Ynj0ISTrehZy1OsBEMmUvTC+/wGqKUyiDmaay4rhoAv18LmF04jw86j1ZtSNFdij1bPmDVF+yWyrLYTd7CICys/q27jpX+atu1xo7/74S0+2zk15MnGP124i8+3geLpKRQmU6GxNitpa4X+an9/lKDO7zw52ZZdVXKlZ+5rdOw6FmgzLfIxXAI/8/PyKmkcLu/0hACn5tznSCCipRoxA10PvKTxozlkprKUsvPeaHpMQKy9/75gsbf9bdyXhzAWn19ayq34szu9yFhmTz9T+fuWhDU0pLLcjQkqdVQoOhoxqgolRwQxfRfCUmKIzfvDFMRliiXVODCgzjZ0tW/5WgSh9rMNEZxOK2MwpExIvb5Lc5FROtgtPV9ywZXb3VIxZN+OF9MOkvGDweu06J9xdZgiAKBC24wrSLbn8+GY+j9VOrSB2rBsvHviY9iuxSmtSWhwlzl1Ltg1wI0="
 
 cache:
   yarn: true
