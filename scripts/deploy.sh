@@ -2,10 +2,10 @@ set -o errexit
 SOURCE_BRANCH="master"
 
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
-if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
-    echo "Skipping deploy; just doing a build."
-    exit 0
-fi
+# if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]; then
+#     echo "Skipping deploy; just doing a build."
+#     exit 0
+# fi
 
 
 git init
@@ -15,11 +15,8 @@ git remote add upstream "https://$GH_TOKEN@github.com/diogofcunha/react-data-gri
 git fetch upstream
 git reset upstream/gh-pages
 
-echo "myproject.com" > CNAME
-touch .
+npm run copyBuild
 
 git add -A .
 git commit -m "rebuild pages"
 git push -q upstream HEAD:gh-pages
-
-npm run build
