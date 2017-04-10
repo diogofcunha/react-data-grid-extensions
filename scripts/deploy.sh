@@ -16,6 +16,7 @@ git reset upstream/gh-pages
 
 yarn run copyBuild
 
+touch .
 git add -A .
 git commit -m "rebuild pages"
 git push -q upstream HEAD:gh-pages
