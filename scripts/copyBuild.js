@@ -5,11 +5,17 @@ const config = require('../config/paths');
 const buildFolder = config.appBuild;
 const rootFolder = path.join(__dirname, '../');
 
+const filesPathsToPresist = [
+   buildFolder,
+   path.join(rootFolder, '.DS_Store'),
+   path.join(rootFolder, '.git')
+];
+
 fs.readdir(rootFolder, (err, files) => {
   files.forEach(file => {
      const fullPath = path.join(rootFolder, file);
-     if (fullPath !== buildFolder) {
-        fs.removeSync(fullPath);
+     if (filesPathsToPresist.indexOf(fullPath) === -1) {
+      fs.removeSync(fullPath);
      }
   });
 
