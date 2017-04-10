@@ -19,9 +19,9 @@ fs.readdir(rootFolder, (err, files) => {
      }
   });
 
-  fs.copy(buildFolder, rootFolder, err => {
-      if (err) {
-         throw new Error(err)
+  fs.copy(buildFolder, rootFolder, copyError => {
+      if (copyError) {
+         throw new Error(copyError)
       }
 
       console.log("Build folder copy executed");
