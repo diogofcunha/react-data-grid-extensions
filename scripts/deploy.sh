@@ -15,8 +15,7 @@ git fetch upstream
 git reset upstream/gh-pages
 
 yarn run copyBuild
-echo "$(date +%s)" > version.txt
 
 git add -A .
-git commit -m "rebuild pages"
+git commit -m "rebuild pages" --allow-empty
 git push -q upstream HEAD:gh-pages
