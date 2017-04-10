@@ -7,11 +7,10 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]
     exit 0
 fi
 
-
 git init
 git config user.name "Diogo Cunha"
 git config user.email "diogofncunha@gmail.com"
-git remote add upstream "https://$GH_TOKEN@github.com/diogofcunha/react-data-grid-extensions.git"
+git remote add upstream "https://$GH_TOKEN@github.com/$GITHUB_REPO"
 git fetch upstream
 git reset upstream/gh-pages
 
