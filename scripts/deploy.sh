@@ -14,9 +14,11 @@ git remote add upstream "https://$GH_TOKEN@github.com/$GITHUB_REPO"
 git fetch upstream
 git reset upstream/gh-pages
 
+echo "myproject.com" > CNAME
+touch .
+
 yarn run copyBuild
 
-touch .
 git add -A .
 git commit -m "rebuild pages"
 git push -q upstream HEAD:gh-pages
