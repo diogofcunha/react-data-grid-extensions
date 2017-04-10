@@ -5,10 +5,19 @@ const config = require('../config/paths');
 const buildFolder = config.appBuild;
 const rootFolder = path.join(__dirname, '../');
 
-fs.copy(buildFolder, rootFolder, err => {
-   if (err) {
-      throw new Error(err)
-   }
+fs.readdir(rootFolder, (err, files) => {
+  files.forEach(file => {
+     const fullPath = path.join(rootFolder, file);
+     if (fullPath !== buildFolder) {
+        fs.removeSync(fullPath);
+     }
+  });
 
-   console.log("Build folder copy executed");
+  fs.copy(buildFolder, rootFolder, err => {
+      if (err) {
+         throw new Error(err)
+      }
+
+      console.log("Build folder copy executed");
+   });
 });
