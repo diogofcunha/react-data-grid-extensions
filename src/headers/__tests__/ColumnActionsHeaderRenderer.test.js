@@ -1,4 +1,6 @@
 import ColumnActionsHeaderRenderer from '../ColumnActionsHeaderRenderer';
+import { COLUMN_CHANGE_TYPE } from '../../constants/ColumnActions';
+
 import { shallow } from 'enzyme';
 import React from 'react';
 
@@ -8,12 +10,12 @@ describe('ColumnActionsHeaderRenderer', () => {
    const props = {
       column: { name: 'Column 1' },
       onColumnChanged: jest.fn(),
-      onColumnDeleted: jest.fn(),
       index: 0
    };
 
    beforeEach(() => {
       actionHeaderRendererWrapper = shallow(<ColumnActionsHeaderRenderer {...props} />);
+      props.onColumnChanged.mockReset();
    })
 
    const getEditColumn = () => actionHeaderRendererWrapper.find('.glyphicon-pencil');
@@ -29,9 +31,12 @@ describe('ColumnActionsHeaderRenderer', () => {
    it('deleting a column should call onColumnDeleted with the correct params', () => {
       getDeleteColumn().simulate('click');
 
-      const { onColumnDeleted, index } = props;
+      const { onColumnChanged, index } = props;
 
-      expect(onColumnDeleted).lastCalledWith(index);
+      expect(onColumnChanged).lastCalledWith({
+         index,
+         type: COLUMN_CHANGE_TYPE.DELETE
+      });
    })
 
    it('editing a column should render column edit wiht the correct props', () => {
@@ -53,8 +58,9 @@ describe('ColumnActionsHeaderRenderer', () => {
       const { index, onColumnChanged } = props;
 
       expect(onColumnChanged).lastCalledWith({
+         index,
          column: { name: currentName },
-         index
+         type: COLUMN_CHANGE_TYPE.EDIT
       })
    });
 });

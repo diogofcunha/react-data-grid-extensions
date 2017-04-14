@@ -8,19 +8,17 @@ describe('columnActionHeader', () => {
    ]
 
    const handleColumnChange = () => {};
-   const handleColumnDelete = () => {};
 
    it('connectHeader should work as expected', () => {
-      const columns = connectHeader({ handleColumnChange, handleColumnDelete })(originalColumns);
+      const columns = connectHeader({ handleColumnChange })(originalColumns);
 
       columns.forEach((c, i) => {
          const { headerRenderer } = c;
-         const { props: { column, index, onColumnChanged, onColumnDeleted } } = headerRenderer;
+         const { props: { column, index, onColumnChanged } } = headerRenderer;
 
          expect(index).toBe(i);
          expect(column).toBe(originalColumns[i]);
          expect(onColumnChanged).toBe(handleColumnChange);
-         expect(onColumnDeleted).toBe(handleColumnDelete); 
       })
    });
 });
