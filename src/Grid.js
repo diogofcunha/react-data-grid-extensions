@@ -5,6 +5,7 @@ import { connectHeader } from './headers/columnActionHeader';
 import PercentageEditor from './editors/PercentageEditor';
 import DateEditor from './editors/DateEditor';
 import JsonFormatter from './formatters/JsonFormatter';
+import { COLUMN_CHANGE_TYPE } from './constants/ColumnActions';
 
 const getInitialColumns = () => ([
    {
@@ -95,15 +96,19 @@ const handleColumnDelete = ({ index, setColumns }) => {
   }
 }
 
+const COLUMN_CHANGES = {
+  [COLUMN_CHANGE_TYPE.DELETE]: handleColumnDelete,
+  [COLUMN_CHANGE_TYPE.EDIT]: handleColumnChange 
+};
+
 class Grid extends Component {
    constructor() {
       super();
       this.rowGetter = this.rowGetter.bind(this);
       this.handleColumnChange = this.handleColumnChange.bind(this);
-      this.handleColumnDelete = this.handleColumnDelete.bind(this);
       this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
 
-      this.setColumns = connectHeader({ handleColumnChange: this.handleColumnChange, handleColumnDelete: this.handleColumnDelete });
+      this.setColumns = connectHeader({ handleColumnChange: this.handleColumnChange });
     
       this.state = {
         rows: this.createRows(1000),
@@ -140,12 +145,10 @@ class Grid extends Component {
     return this.state.rows[i];
   }
 
-  handleColumnChange(change) {
-    this.setState(handleColumnChange({ ...change, ...{ setColumns: this.setColumns } }));
-  }
+  handleColumnChange({ type, ...extra }) {
+    const updatedCb = COLUMN_CHANGES[type];
 
-  handleColumnDelete(index) {
-    this.setState(handleColumnDelete({ index, setColumns: this.setColumns }));
+    this.setState(updatedCb({ ...extra, setColumns: this.setColumns }));
   }
 
   handleGridRowsUpdated({ fromRow, toRow, updated }) {

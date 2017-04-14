@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import ColumnEditor from './ColumnEditor';
 import './styles/header.css';
+import { COLUMN_CHANGE_TYPE } from '../constants/ColumnActions';
 
 class ColumnActionsHeaderRenderer extends Component {
    static columnShape = {
@@ -10,7 +11,6 @@ class ColumnActionsHeaderRenderer extends Component {
    static propTypes = {
       column: PropTypes.shape(ColumnActionsHeaderRenderer.columnShape),
       onColumnChanged: PropTypes.func.isRequired,
-      onColumnDeleted: PropTypes.func.isRequired,
       index: PropTypes.number.isRequired,
    }
 
@@ -40,14 +40,14 @@ class ColumnActionsHeaderRenderer extends Component {
    handleColumnCommit() {
       const { index, column, onColumnChanged } = this.props;
       const { name } = this.state;
-      onColumnChanged({ column: { ...column, name }, index });
+      onColumnChanged({ type: COLUMN_CHANGE_TYPE.EDIT, column: { ...column, name }, index });
       this.setState({ editing: false });
    }
 
    handleColumnDelete() {
-      const { index, onColumnDeleted } = this.props;
+      const { index, onColumnChanged } = this.props;
 
-      onColumnDeleted(index);
+      onColumnChanged({ type: COLUMN_CHANGE_TYPE.DELETE, index });
    }
 
    render() {
