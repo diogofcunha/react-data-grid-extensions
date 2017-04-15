@@ -1,5 +1,6 @@
 export const COLUMN_CHANGE_TYPE = {
    ADD: 0,
-   EDIT: 1,
-   DELETE: 2
+   POST_ADD: 1,
+   EDIT: 2,
+   DELETE: 3
 };

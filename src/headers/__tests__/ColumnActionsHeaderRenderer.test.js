@@ -1,6 +1,5 @@
 import ColumnActionsHeaderRenderer from '../ColumnActionsHeaderRenderer';
 import { COLUMN_CHANGE_TYPE } from '../../constants/ColumnActions';
-
 import { shallow } from 'enzyme';
 import React from 'react';
 
@@ -20,6 +19,7 @@ describe('ColumnActionsHeaderRenderer', () => {
 
    const getEditColumn = () => actionHeaderRendererWrapper.find('.glyphicon-pencil');
    const getDeleteColumn = () => actionHeaderRendererWrapper.find('.glyphicon-remove');
+   const getAddColumn = () => actionHeaderRendererWrapper.find('.glyphicon-plus');
    const getColumnEditor = () => actionHeaderRendererWrapper.find('ColumnEditor');
 
    it('renders an edit and remove option', () => {
@@ -28,7 +28,7 @@ describe('ColumnActionsHeaderRenderer', () => {
       expect(getColumnEditor().length).toBe(0);
    });
 
-   it('deleting a column should call onColumnDeleted with the correct params', () => {
+   it('deleting a column should call onColumnChanged with the correct params', () => {
       getDeleteColumn().simulate('click');
 
       const { onColumnChanged, index } = props;
@@ -39,7 +39,7 @@ describe('ColumnActionsHeaderRenderer', () => {
       });
    })
 
-   it('editing a column should render column edit wiht the correct props', () => {
+   it('editing a column should render column edit wiht the correct params', () => {
       getEditColumn().simulate('click');
 
       const { name, handleChange, commitValue } = getColumnEditor().props();
@@ -61,6 +61,17 @@ describe('ColumnActionsHeaderRenderer', () => {
          index,
          column: { name: currentName },
          type: COLUMN_CHANGE_TYPE.EDIT
+      })
+   });
+
+   it('handleColumnAdd shoudl call onColumnChanged with the correct params', () => {
+      getAddColumn().simulate('click');
+
+      const { onColumnChanged, index } = props;
+
+      expect(onColumnChanged).lastCalledWith({
+         index,
+         type: COLUMN_CHANGE_TYPE.ADD
       })
    });
 });

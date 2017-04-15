@@ -1,11 +1,13 @@
 const ReactDataGrid = require('react-data-grid');
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
 import { connectHeader } from './headers/columnActionHeader';
 import PercentageEditor from './editors/PercentageEditor';
 import DateEditor from './editors/DateEditor';
 import JsonFormatter from './formatters/JsonFormatter';
 import { COLUMN_CHANGE_TYPE } from './constants/ColumnActions';
+import ModalContainer from './modals/ModalContainer';
+import AddColumn from './modals/AddColumn';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const getInitialColumns = () => ([
    {
@@ -96,9 +98,40 @@ const handleColumnDelete = ({ index, setColumns }) => {
   }
 }
 
+const handleColumnAdd = ({ index, handleColumnChange }) => ({
+  modalProps: {
+    isOpen: true,
+    headerProps: {
+      text: 'Add a new column'
+    },
+    BodyRenderer: AddColumn,
+    requiredFields: [ 'key', 'name' ],
+    handleSubmit: column => handleColumnChange({ index, column, type: COLUMN_CHANGE_TYPE.POST_ADD })
+  }
+});
+
+const handleColumnPostAdd = ({ index, column: { defaultValue, ...column } }) => {
+  return ({ columns, rows: oldRows }) => {
+    const updateColumns = [...columns];
+    updateColumns.splice(index + 1, 0, column);
+
+    const rows = oldRows.map(r => ({ ...r, [column.key]: defaultValue }))
+
+    return {
+      rows,
+      columns: updateColumns,
+      modalProps: {
+        isOpen: false
+      }
+    };
+  }
+}
+
 const COLUMN_CHANGES = {
   [COLUMN_CHANGE_TYPE.DELETE]: handleColumnDelete,
-  [COLUMN_CHANGE_TYPE.EDIT]: handleColumnChange 
+  [COLUMN_CHANGE_TYPE.EDIT]: handleColumnChange,
+  [COLUMN_CHANGE_TYPE.ADD]: handleColumnAdd,
+  [COLUMN_CHANGE_TYPE.POST_ADD]: handleColumnPostAdd
 };
 
 class Grid extends Component {
@@ -107,12 +140,14 @@ class Grid extends Component {
       this.rowGetter = this.rowGetter.bind(this);
       this.handleColumnChange = this.handleColumnChange.bind(this);
       this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
+      this.handleModalClose = this.handleModalClose.bind(this);
 
       this.setColumns = connectHeader({ handleColumnChange: this.handleColumnChange });
     
       this.state = {
         rows: this.createRows(1000),
-        columns: this.setColumns(getInitialColumns())
+        columns: this.setColumns(getInitialColumns()),
+        modalProps: { isOpen: false }
       };
    }
 
@@ -148,7 +183,11 @@ class Grid extends Component {
   handleColumnChange({ type, ...extra }) {
     const updatedCb = COLUMN_CHANGES[type];
 
-    this.setState(updatedCb({ ...extra, setColumns: this.setColumns }));
+    this.setState(updatedCb({ ...extra, setColumns: this.setColumns, handleColumnChange: this.handleColumnChange }));
+  }
+
+  handleModalClose() {
+    this.setState({ modalProps: { isOpen: false } });
   }
 
   handleGridRowsUpdated({ fromRow, toRow, updated }) {
@@ -164,14 +203,19 @@ class Grid extends Component {
   }
 
   render() {
+    const { columns, rows, modalProps } = this.state;
+
     return  (
-      <ReactDataGrid
-        enableCellSelect={true}
-        columns={this.state.columns}
-        rowGetter={this.rowGetter}
-        rowsCount={this.state.rows.length}
-        minHeight={600}
-        onGridRowsUpdated={this.handleGridRowsUpdated} />);
+      <div>
+        <ModalContainer {...modalProps} onClose={this.handleModalClose}/>
+        <ReactDataGrid
+          enableCellSelect={true}
+          columns={columns}
+          rowGetter={this.rowGetter}
+          rowsCount={rows.length}
+          minHeight={600}
+          onGridRowsUpdated={this.handleGridRowsUpdated} />
+      </div>);
   }
 };
 
