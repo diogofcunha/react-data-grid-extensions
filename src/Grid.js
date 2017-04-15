@@ -1,4 +1,3 @@
-import ReactDataGrid from 'react-data-grid';
 import ReactDataGridExtensionsWrapper from './wrapper/ReactDataGridExtensionsWrapper';
 import React, { Component } from 'react';
 import PercentageEditor from './editors/PercentageEditor';

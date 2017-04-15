@@ -1,7 +1,6 @@
 import ReactDataGrid from'react-data-grid';
 import React, { Component } from 'react';
 import { connectHeader } from '../headers/columnActionHeader';
-import { COLUMN_CHANGE_TYPE } from '../constants/ColumnActions';
 import ModalContainer from '../modals/ModalContainer';
 import { handleGridRowsUpdated, handleModalClose } from './defaultHandlers';
 import COLUMN_CHANGES from './columnActionHandlers';
