@@ -1,10 +1,9 @@
-const ReactDataGrid = require('react-data-grid');
+import ReactDataGridExtensionsWrapper from './wrapper/ReactDataGridExtensionsWrapper';
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import { connectHeader } from './headers/columnActionHeader';
 import PercentageEditor from './editors/PercentageEditor';
 import DateEditor from './editors/DateEditor';
 import JsonFormatter from './formatters/JsonFormatter';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const getInitialColumns = () => ([
    {
@@ -67,48 +66,12 @@ const getInitialColumns = () => ([
    }
 ]);
 
-const handleColumnChange = ({ column: updatedColumn, index, setColumns }) => {
-  return ({ columns: currentColumns }) => {
-    const columns = setColumns(currentColumns.map((c, i) => {
-      if (index === i) {
-        return updatedColumn;
-      }
-
-      return c;
-    }));
-
-    return { columns };
-  }
-}
-
-const handleColumnDelete = ({ index, setColumns }) => {
-  return ({ columns: currentColumns }) => {
-    const columns = setColumns(currentColumns.reduce((acc, c, i) => {
-      if (index === i) {
-        return acc;
-      }
-
-      return [...acc, c];
-    }, []));
-
-    return { columns };
-  }
-}
-
-class Grid extends Component {
+class ExampleGrid extends Component {
    constructor() {
       super();
-      this.rowGetter = this.rowGetter.bind(this);
-      this.handleColumnChange = this.handleColumnChange.bind(this);
-      this.handleColumnDelete = this.handleColumnDelete.bind(this);
-      this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this);
 
-      this.setColumns = connectHeader({ handleColumnChange: this.handleColumnChange, handleColumnDelete: this.handleColumnDelete });
-    
-      this.state = {
-        rows: this.createRows(1000),
-        columns: this.setColumns(getInitialColumns())
-      };
+      this._rows = this.createRows(1000);
+      this._columns = getInitialColumns();
    }
 
   getRandomDate(start, end) {
@@ -136,41 +99,17 @@ class Grid extends Component {
     return rows;
   }
 
-  rowGetter(i) {
-    return this.state.rows[i];
-  }
-
-  handleColumnChange(change) {
-    this.setState(handleColumnChange({ ...change, ...{ setColumns: this.setColumns } }));
-  }
-
-  handleColumnDelete(index) {
-    this.setState(handleColumnDelete({ index, setColumns: this.setColumns }));
-  }
-
-  handleGridRowsUpdated({ fromRow, toRow, updated }) {
-    let rows = this.state.rows.slice();
-
-    for (let i = fromRow; i <= toRow; i++) {
-      let rowToUpdate = rows[i];
-      let updatedRow = { ...rowToUpdate, ...updated };
-      rows[i] = updatedRow;
-    }
-
-    this.setState({ rows });
-  }
-
   render() {
+    const { _rows, _columns } = this;
+
+    const wrapperProps = {
+      originalRows: _rows,
+      originalColumns: _columns
+    };
+
     return  (
-      <ReactDataGrid
-        enableCellSelect={true}
-        columns={this.state.columns}
-        rowGetter={this.rowGetter}
-        rowsCount={this.state.rows.length}
-        minHeight={600}
-        onGridRowsUpdated={this.handleGridRowsUpdated} />);
+      <ReactDataGridExtensionsWrapper wrapper={wrapperProps} />);
   }
 };
 
-export default Grid;
-
+export default ExampleGrid;

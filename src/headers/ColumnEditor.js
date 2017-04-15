@@ -1,6 +1,11 @@
 import React, { PropTypes, Component } from 'react';
 
 class ColumnEditor extends Component {
+   constructor() {
+      super();
+      this.handeKeyDown = this.handeKeyDown.bind(this);
+   }
+
    static propTypes = {
       name: PropTypes.string,
       handleChange: PropTypes.func.isRequired,
@@ -12,6 +17,19 @@ class ColumnEditor extends Component {
       this._input.select();
    }
 
+   handeKeyDown({ key }) {
+      const { commitValue } = this.props;
+
+      switch (key) {
+         case 'Tab':
+            commitValue();
+            break;
+      
+         default:
+            break;
+      }
+   }
+
    render() {
       const { name, handleChange, commitValue } = this.props;
       return (
@@ -20,6 +38,7 @@ class ColumnEditor extends Component {
             type="text"
             value={name}
             onChange={handleChange}
+            onKeyDown={this.handeKeyDown}
             onBlur={commitValue} 
             className="react-grid-HeaderCell edit-input"
             />

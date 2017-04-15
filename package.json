@@ -5,9 +5,9 @@
   "homepage": "https://diogofcunha.github.io/react-data-grid-extensions/",
   "description": "A set of extensions for react-data-grid",
   "author": {
-    "name" : "Diogo Cunha",
-    "email" : "diogofncunha@gmail.com",
-    "url" : "http://www.diogocunha.net/"
+    "name": "Diogo Cunha",
+    "email": "diogofncunha@gmail.com",
+    "url": "http://www.diogocunha.net/"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
     "http-proxy-middleware": "0.17.3",
     "jest": "18.1.0",
     "json-loader": "0.5.4",
+    "less": "^2.7.2",
     "object-assign": "4.1.1",
     "postcss-loader": "1.2.2",
     "promise": "7.1.1",
@@ -62,11 +63,12 @@
   },
   "peerDependencies": {
     "react": "^15.4.2",
-    "react-dom": "^15.4.2",
     "react-data-grid": "^2.0.24",
-    "react-data-grid-addons": "^2.0.24"
+    "react-data-grid-addons": "^2.0.24",
+    "react-dom": "^15.4.2"
   },
   "scripts": {
+    "build-less": "lessc src/styles/modules.less src/styles/modules.css",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
@@ -75,7 +77,9 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "elemental": "^0.6.1",
     "rc-slider": "^7.0.0",
+    "react-addons-css-transition-group": "^15.5.2",
     "react-day-picker": "^5.2.0"
   },
   "jest": {
