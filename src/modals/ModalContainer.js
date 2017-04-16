@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import GridModal from './GridModal';
 
 const handleChange = ({ key, value }) => state => ({ ...state, [key]: value });
@@ -13,7 +14,21 @@ class ModalContainer extends Component {
       this.state = { };
    }
 
-   static defaultProps = { requiredFields: [] }
+   static defaultProps = {
+      requiredFields: [],
+      BodyRenderer: () => {},
+      headerProps: { text: 'New modal' },
+      handleSubmit: () => {}
+   }
+
+   static propTypes = {
+      BodyRenderer: PropTypes.func,
+      isOpen: PropTypes.bool.isRequired,
+      headerProps: PropTypes.object,
+      onClose: PropTypes.func.isRequired,
+      requiredFields: PropTypes.arrayOf(PropTypes.string),
+      handleSubmit: PropTypes.func.isRequired
+   }
 
    componentWillReceiveProps({ isOpen }) {
       if (!isOpen) {
@@ -60,6 +75,7 @@ class ModalContainer extends Component {
          </GridModal>);
    }
 };
+
 
 export default ModalContainer;
 export { handleChange };

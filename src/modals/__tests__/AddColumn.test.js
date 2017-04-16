@@ -8,7 +8,7 @@ describe('AddColumn', () => {
 
    it('should render all input fields with the correct props', () => {
       const state = getState();
-      const wrapper = shallow(<AddColumn state={state} />);
+      const wrapper = shallow(<AddColumn state={state} handleChange={() => {}}/>);
       const forms = wrapper.find('div');
 
       INPUT_FIELDS.forEach((f, i) => {

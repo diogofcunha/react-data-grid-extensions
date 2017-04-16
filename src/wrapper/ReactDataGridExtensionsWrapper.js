@@ -1,10 +1,16 @@
 import ReactDataGrid from'react-data-grid';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connectHeader } from '../headers/columnActionHeader';
 import ModalContainer from '../modals/ModalContainer';
 import { handleGridRowsUpdated, handleModalClose } from './defaultHandlers';
 import COLUMN_CHANGES from './columnActionHandlers';
 import 'bootstrap/dist/css/bootstrap.css';
+
+const wrapperPropsShape = {
+  originalRows: PropTypes.array.isRequired,
+  originalColumns: PropTypes.array.isRequired
+};
 
 class ReactDataGridExtensionsWrapper extends Component {
    constructor(props) {
@@ -27,6 +33,10 @@ class ReactDataGridExtensionsWrapper extends Component {
 
    static defaultProps = {
       gridProps: {}
+   }
+
+   static propTypes = {
+     wrapper: PropTypes.shape(wrapperPropsShape).isRequired
    }
 
    rowGetter(i) {

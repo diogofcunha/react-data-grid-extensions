@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormField, FormInput, Checkbox } from 'elemental';
 
 const parseControlValue = v => v === 'on';
@@ -25,7 +26,7 @@ const AddColumn = ({ handleChange, state = { }}) => {
          {
             INPUT_FIELDS.map(({ Type, key, label, placeholder }) => {
                return (
-                  <FormField label={label} htmlFor={key}>
+                  <FormField label={label} htmlFor={key} key={key}>
                      <Type
                         placeholder={placeholder}
                         name={key}
@@ -38,6 +39,11 @@ const AddColumn = ({ handleChange, state = { }}) => {
       </div>
    );
 }
+
+AddColumn.propTypes = {
+   handleChange: PropTypes.func.isRequired,
+   state: PropTypes.object.isRequired
+};
 
 export default AddColumn;
 export { INPUT_FIELDS };

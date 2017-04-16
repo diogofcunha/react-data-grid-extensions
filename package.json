@@ -49,11 +49,11 @@
     "postcss-loader": "1.2.2",
     "promise": "7.1.1",
     "react": "^15.4.2",
-    "react-addons-test-utils": "^15.5.0",
     "react-data-grid": "^2.0.24",
     "react-data-grid-addons": "^2.0.24",
     "react-dev-utils": "^0.5.2",
-    "react-dom": "^15.4.2",
+    "react-dom": "^15.5.4",
+    "react-test-renderer": "^15.5.4",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.14.0",
@@ -78,6 +78,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "elemental": "^0.6.1",
+    "prop-types": "^15.5.8",
     "rc-slider": "^7.0.0",
     "react-addons-css-transition-group": "^15.5.2",
     "react-day-picker": "^5.2.0"

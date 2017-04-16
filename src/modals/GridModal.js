@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Modal, ModalBody, ModalFooter, ModalHeader, Button } from 'elemental';
 import '../styles/modules.css';
 
@@ -22,5 +23,18 @@ const GridModal = ({
       </Modal>
    );
 };
+
+const headerPropsShape = {
+   text: PropTypes.string.isRequired
+}
+
+GridModal.propTypes = {
+   isOpen: PropTypes.bool.isRequired,
+   onClose: PropTypes.func.isRequired,
+   headerProps: PropTypes.shape(headerPropsShape).isRequired,
+   children: PropTypes.node,
+   handleSubmit: PropTypes.func.isRequired,
+   isSubmitDisabled: PropTypes.bool.isRequired
+}
 
 export default GridModal;

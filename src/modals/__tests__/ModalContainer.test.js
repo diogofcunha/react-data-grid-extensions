@@ -11,7 +11,8 @@ describe('ModalContainer', () => {
       onClose: jest.fn(),
       headerProps: {
          p1: 1,
-         p2: 2
+         p2: 2,
+         text: 'New modal'
       },
       BodyRenderer: () => <div>Body!</div>
    };

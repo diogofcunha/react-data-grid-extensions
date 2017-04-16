@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ColumnEditor from './ColumnEditor';
 import { COLUMN_CHANGE_TYPE } from '../constants/ColumnActions';
 import './styles/header.css';
