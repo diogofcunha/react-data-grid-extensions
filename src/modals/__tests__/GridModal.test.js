@@ -12,7 +12,7 @@ describe('GridModal', () => {
       headerProps: {
          text: 'This is the modal Title'
       },
-      children: () => <div className="child"></div>,
+      children: <div className="child"></div>,
       handleSubmit: () => {},
       isSubmitDisabled: true
    };
