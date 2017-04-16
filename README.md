@@ -11,3 +11,4 @@ Includes some of the implementation FAQ, it includes:
 
 [![npm version](https://badge.fury.io/js/react-data-grid-extensions.svg)](https://badge.fury.io/js/react-data-grid-extensions)
 [![Build Status](https://travis-ci.org/diogofcunha/react-data-grid-extensions.svg?branch=master)](https://travis-ci.org/diogofcunha/react-data-grid-extensions)
+[![Coverage Status](https://coveralls.io/repos/github/diogofcunha/react-data-grid-extensions/badge.svg?branch=fix-warnings)](https://coveralls.io/github/diogofcunha/react-data-grid-extensions?branch=fix-warnings)
