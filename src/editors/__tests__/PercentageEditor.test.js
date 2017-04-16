@@ -1,7 +1,8 @@
-import { PercentageEditor } from '../PercentageEditor';
+import { PercentageEditor, HandleSlider } from '../PercentageEditor';
 import React from 'react';
 import { shallow } from 'enzyme';
-import Slider from 'rc-slider';
+import Slider, { Handle } from 'rc-slider';
+import Tooltip from 'rc-tooltip';
 
 describe('PercentageEditor', () => {
    let percentageEditorWrapper;
@@ -25,5 +26,39 @@ describe('PercentageEditor', () => {
       expect(min).toBe(minValue);
       expect(defaultValue).toBe(editorValue);
       expect(onChange).toBe(onValueChanged);
+   });
+
+   describe('handle', () => {
+      let handerWrapper;
+
+      const handlerProps = {
+         value: 1,
+         dragging: true,
+         index: 2,
+         extraProp: 'extra',
+         anotherProp: 'extra2'
+      };
+
+      beforeEach(() => {
+         handerWrapper = shallow(<HandleSlider {...handlerProps} />);
+      });
+
+      it('renders a Tooltip with the correct props', () => {
+         const { overlay, visible } = handerWrapper.find(Tooltip).props();
+         const { value: expectedOverlay, dragging: expectedVisibility, index: expectedKey } = handlerProps;
+
+         expect(overlay).toBe(expectedOverlay);
+         expect(visible).toBe(expectedVisibility);
+      });
+
+      it('renders a Handle with the correct props', () => {
+         const handleProps = handerWrapper.find(Handle).props();
+         const { extraProp, anotherProp } = handlerProps;
+
+         expect(handleProps).toEqual({
+            extraProp,
+            anotherProp
+         });
+      });
    });
 });
