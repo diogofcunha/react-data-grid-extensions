@@ -75,7 +75,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "copyBuild": "node scripts/copyBuild.js",
     "deploy": "./scripts/deploy.sh",
-    "posttest": "node node_modules/.bin/jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "posttest": "node scripts/test.js --env=jsdom --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
