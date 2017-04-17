@@ -4,7 +4,7 @@ import Formatters from './formatters/';
 import Editors from './editors';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const { DateEditor, PercentageEditor } = Editors;
+const { DateEditor, PercentageEditor, ColorEditor } = Editors;
 const { JsonFormatter, ColorFormatter } = Formatters;
 
 const getInitialColumns = () => ([
@@ -25,6 +25,7 @@ const getInitialColumns = () => ([
       key: 'priority',
       name: 'Priority',
       formatter: ColorFormatter,
+      editor: ColorEditor,
       editable: true,
       resizable: true,
       width: 125
