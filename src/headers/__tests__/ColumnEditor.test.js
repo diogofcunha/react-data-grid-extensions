@@ -7,13 +7,16 @@ describe('ColumnEditor', () => {
    const props = {
       handleChange: jest.fn(),
       commitValue: jest.fn(),
-      name: 'Column 234'
+      name: 'Column 234',
    }
+
+   const { commitValue } = props;
 
    const getInput = () => columnEditorWrapper.find('input');
 
    beforeEach(() => {
       columnEditorWrapper = shallow(<ColumnEditor {...props} />);
+      commitValue.mockClear();
    });
 
    it('should render with the correct value', () => {
@@ -23,10 +26,25 @@ describe('ColumnEditor', () => {
    })
 
    it('should pass down the correct handlers', () => {
-      const { onChange, onBlur } = getInput().props();
+      const { onChange, onBlur, onKeyDown, autoFocus } = getInput().props();
       const { handleChange, commitValue } = props;
 
       expect(onChange).toBe(handleChange);
       expect(onBlur).toBe(commitValue);
+      expect(autoFocus).toBeDefined();
+      expect(onKeyDown).toBeDefined();
    });
+
+   it('should call commitValue when tab is pressed', () => {
+      getInput().simulate('keyDown', { key: 'Tab' });
+
+      expect(commitValue).toHaveBeenCalled();
+   });
+
+   it('should not call commitValue when a key other then tab is pressed', () => {
+      getInput().simulate('keyDown', { key: 'ArrowUp' });
+      getInput().simulate('keyDown', { key: 'a' });
+
+      expect(commitValue).not.toHaveBeenCalled();
+   })
 });
