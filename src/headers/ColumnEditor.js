@@ -13,11 +13,6 @@ class ColumnEditor extends Component {
       commitValue: PropTypes.func.isRequired
    }
 
-   componentDidMount() {
-      this._input.focus();
-      this._input.select();
-   }
-
    handeKeyDown({ key }) {
       const { commitValue } = this.props;
 
@@ -35,7 +30,7 @@ class ColumnEditor extends Component {
       const { name, handleChange, commitValue } = this.props;
       return (
          <input
-            ref={ i => { this._input = i } }
+            autoFocus
             type="text"
             value={name}
             onChange={handleChange}

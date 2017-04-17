@@ -6,7 +6,7 @@ import './styles/editor.css';
 import 'rc-slider/assets/index.css';
 import Tooltip from 'rc-tooltip';
 
-const handle = (props) => {
+export const HandleSlider = (props) => {
   const { value, dragging, index, ...restProps } = props;
   return (
     <Tooltip
@@ -24,7 +24,7 @@ const handle = (props) => {
 const PercentageEditor = ({ editorValue, minValue, maxValue, onValueChanged }) => {
    return (
       <div className="editor-main editor-base">
-         <Slider min={minValue} max={maxValue} defaultValue={editorValue} onChange={onValueChanged} handle={handle}/>
+         <Slider min={minValue} max={maxValue} defaultValue={editorValue} onChange={onValueChanged} handle={HandleSlider}/>
       </div>
    );
 };
