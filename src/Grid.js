@@ -1,9 +1,11 @@
 import ReactDataGridExtensionsWrapper from './wrapper/ReactDataGridExtensionsWrapper';
 import React, { Component } from 'react';
-import PercentageEditor from './editors/PercentageEditor';
-import DateEditor from './editors/DateEditor';
-import JsonFormatter from './formatters/JsonFormatter';
+import Formatters from './formatters/';
+import Editors from './editors';
 import 'bootstrap/dist/css/bootstrap.css';
+
+const { DateEditor, PercentageEditor } = Editors;
+const { JsonFormatter, ColorFormatter } = Formatters;
 
 const getInitialColumns = () => ([
    {
@@ -22,6 +24,7 @@ const getInitialColumns = () => ([
    {
       key: 'priority',
       name: 'Priority',
+      formatter: ColorFormatter,
       editable: true,
       resizable: true,
       width: 125
@@ -82,7 +85,7 @@ class ExampleGrid extends Component {
     let rows = [];
     for (let i = 1; i < numberOfRows; i++) {
       const id = i;
-      const priority = ['Critical', 'High', 'Medium', 'Low'][Math.floor((Math.random() * 3) + 1)];
+      const priority = ['Crimson', 'OrangeRed', 'GoldenRod', 'Green'][Math.floor((Math.random() * 3) + 1)];
       const issueType = ['Bug', 'Improvement', 'Epic', 'Story'][Math.floor((Math.random() * 3) + 1)];
 
       rows.push({
