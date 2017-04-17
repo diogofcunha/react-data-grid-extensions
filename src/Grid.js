@@ -4,7 +4,7 @@ import Formatters from './formatters/';
 import Editors from './editors';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const { DateEditor, PercentageEditor, ColorEditor } = Editors;
+const { DateEditor, PercentageEditor, ColorEditor, TextAreaEditor } = Editors;
 const { JsonFormatter, ColorFormatter } = Formatters;
 
 const getInitialColumns = () => ([
@@ -67,8 +67,17 @@ const getInitialColumns = () => ([
       editor: DateEditor,
       resizable: true,
       width: 300
+   },
+    {
+      key: 'notes',
+      name: 'Task notes',
+      editable: true,
+      editor: TextAreaEditor,
+      resizable: true,
+      width: 300
    }
 ]);
+
 
 class ExampleGrid extends Component {
    constructor() {
@@ -97,7 +106,8 @@ class ExampleGrid extends Component {
         complete: Math.min(100, Math.round(Math.random() * 110)),
         taskInfo: { id, priority, issueType },
         startDate: this.getRandomDate(new Date(2015, 3, 1), new Date()),
-        completeDate: this.getRandomDate(new Date(), new Date(2016, 0, 1))
+        completeDate: this.getRandomDate(new Date(), new Date(2016, 0, 1)),
+        notes: ''
       });
     }
     return rows;
