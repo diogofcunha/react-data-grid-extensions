@@ -1,3 +1,4 @@
 import JsonFormatter from './JsonFormatter';
+import ColorFormatter from './ColorFormatter';
 
-export default { JsonFormatter };
+export default { JsonFormatter, ColorFormatter };
