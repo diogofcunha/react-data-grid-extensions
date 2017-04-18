@@ -1,9 +1,18 @@
 import ReactDataGridExtensionsWrapper from './wrapper/ReactDataGridExtensionsWrapper';
 import React, { Component } from 'react';
-import PercentageEditor from './editors/PercentageEditor';
-import DateEditor from './editors/DateEditor';
-import JsonFormatter from './formatters/JsonFormatter';
+import Formatters from './formatters/';
+import Editors from './editors';
 import 'bootstrap/dist/css/bootstrap.css';
+
+const { DateEditor, PercentageEditor, ColorEditor, TextAreaEditor, MultiSelectEditor } = Editors;
+const { JsonFormatter, ColorFormatter, MultiSelectFormatter } = Formatters;
+
+const issueTypes = [
+  { value: 'bug', label: 'Bug' },
+  { value: 'improvement', label: 'Improvement' },
+  { value: 'epic', label: 'Epic' },
+  { value: 'story', label: 'Story' }
+];
 
 const getInitialColumns = () => ([
    {
@@ -22,6 +31,8 @@ const getInitialColumns = () => ([
    {
       key: 'priority',
       name: 'Priority',
+      formatter: ColorFormatter,
+      editor: ColorEditor,
       editable: true,
       resizable: true,
       width: 125
@@ -29,6 +40,8 @@ const getInitialColumns = () => ([
    {
       key: 'issueType',
       name: 'Issue Type',
+      editor: <MultiSelectEditor options={issueTypes} />,
+      formatter: MultiSelectFormatter,
       editable: true,
       resizable: true,
       width: 150
@@ -63,8 +76,17 @@ const getInitialColumns = () => ([
       editor: DateEditor,
       resizable: true,
       width: 300
+   },
+    {
+      key: 'notes',
+      name: 'Task notes',
+      editable: true,
+      editor: TextAreaEditor,
+      resizable: true,
+      width: 300
    }
 ]);
+
 
 class ExampleGrid extends Component {
    constructor() {
@@ -82,8 +104,8 @@ class ExampleGrid extends Component {
     let rows = [];
     for (let i = 1; i < numberOfRows; i++) {
       const id = i;
-      const priority = ['Critical', 'High', 'Medium', 'Low'][Math.floor((Math.random() * 3) + 1)];
-      const issueType = ['Bug', 'Improvement', 'Epic', 'Story'][Math.floor((Math.random() * 3) + 1)];
+      const priority = ['Crimson', 'OrangeRed', 'GoldenRod', 'Green'][Math.floor((Math.random() * 3) + 1)];
+      const issueType = [issueTypes[Math.floor((Math.random() * 3) + 1)]];
 
       rows.push({
         id,
@@ -93,7 +115,8 @@ class ExampleGrid extends Component {
         complete: Math.min(100, Math.round(Math.random() * 110)),
         taskInfo: { id, priority, issueType },
         startDate: this.getRandomDate(new Date(2015, 3, 1), new Date()),
-        completeDate: this.getRandomDate(new Date(), new Date(2016, 0, 1))
+        completeDate: this.getRandomDate(new Date(), new Date(2016, 0, 1)),
+        notes: ''
       });
     }
     return rows;

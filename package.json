@@ -83,7 +83,9 @@
     "prop-types": "^15.5.8",
     "rc-slider": "^7.0.0",
     "react-addons-css-transition-group": "^15.5.2",
-    "react-day-picker": "^5.2.0"
+    "react-color": "^2.11.4",
+    "react-day-picker": "^5.2.0",
+    "react-select": "^1.0.0-rc.3"
   },
   "jest": {
     "collectCoverageFrom": [
