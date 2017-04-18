@@ -4,8 +4,15 @@ import Formatters from './formatters/';
 import Editors from './editors';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const { DateEditor, PercentageEditor, ColorEditor, TextAreaEditor } = Editors;
-const { JsonFormatter, ColorFormatter } = Formatters;
+const { DateEditor, PercentageEditor, ColorEditor, TextAreaEditor, MultiSelectEditor } = Editors;
+const { JsonFormatter, ColorFormatter, MultiSelectFormatter } = Formatters;
+
+const issueTypes = [
+  { value: 'bug', label: 'Bug' },
+  { value: 'improvement', label: 'Improvement' },
+  { value: 'epic', label: 'Epic' },
+  { value: 'story', label: 'Story' }
+];
 
 const getInitialColumns = () => ([
    {
@@ -33,6 +40,8 @@ const getInitialColumns = () => ([
    {
       key: 'issueType',
       name: 'Issue Type',
+      editor: <MultiSelectEditor options={issueTypes} />,
+      formatter: MultiSelectFormatter,
       editable: true,
       resizable: true,
       width: 150
@@ -96,7 +105,7 @@ class ExampleGrid extends Component {
     for (let i = 1; i < numberOfRows; i++) {
       const id = i;
       const priority = ['Crimson', 'OrangeRed', 'GoldenRod', 'Green'][Math.floor((Math.random() * 3) + 1)];
-      const issueType = ['Bug', 'Improvement', 'Epic', 'Story'][Math.floor((Math.random() * 3) + 1)];
+      const issueType = [issueTypes[Math.floor((Math.random() * 3) + 1)]];
 
       rows.push({
         id,

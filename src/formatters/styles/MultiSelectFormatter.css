@@ -1,0 +1,8 @@
+.selected {
+   background-color:  #f2f2f2;
+   padding: 10px;
+   margin-left: 2px;
+   margin-right: 2px;
+   border: 2px solid darkgray;
+   border-left: 3px solid black;
+}
